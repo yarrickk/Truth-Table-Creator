@@ -10,11 +10,14 @@ from googleapiclient.discovery import build
 
 from table_creator import TableCreator
 
+# obtain your credentials.json here https://developers.google.com/docs/api/quickstart/python?authuser=2
+
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/documents']
 
-# The ID of a sample document.
-DOCUMENT_ID = '1s7kXPMBMO3CwBqv26eqprqZpPk8lk-fPH3-c66D9JNI'
+# The ID of your document.
+# Example: https://docs.google.com/document/d/document_id/edit
+DOCUMENT_ID = ""
 
 
 def get_creds():
@@ -31,7 +34,7 @@ def get_creds():
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                'credentials.json', SCOPES)
+                '1credentials.json', SCOPES)
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
         with open('token.pickle', 'wb') as token:
