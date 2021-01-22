@@ -8,6 +8,10 @@ class TableCreator:
         self.equations = equations
 
     def _get_sub_equations(self) -> set:
+        """Extract all sub equations from parentheses
+        Example: If self.equations are ["(p∧q)∧r", "p∧(q∧r)"]
+        then result will be {p∧q, q∨r, (p∧q)∨r, p∧(q∨r)}
+        """
         sub_eq = set()
         for expression in self.equations:
             sub_eq.add(expression)
@@ -21,7 +25,8 @@ class TableCreator:
         return sub_eq
 
     def _get_variables(self) -> set:
-        return set(re.findall(r"[a-zA-Z]", "".join(self.equations)))
+        """variables contain only one letter"""
+        return set(re.findall(r"[a-zA-Z]", " ".join(self.equations)))
 
     def _reformat_equations_for_eval(self) -> list:
         return [
@@ -44,6 +49,7 @@ class TableCreator:
         expr_for_eval = self._reformat_equations_for_eval()
 
         for i, row in enumerate(table[1:], start=1):  # skip header row
+            # initialize variables with their values from truth_table to be used in eval
             for j, var in enumerate(sorted(eq_variables)):
                 globals()[var] = row[j]
             table[i] = ["T" if eval(eq) else "F" for eq in expr_for_eval]
