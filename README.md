@@ -1,6 +1,6 @@
 # Truth-Table-Creator
 
-To run uploader_to_docs.py:
+To run uploader_to_docs.py that will generate truth table of given equations and then add it to your google doc file:
 
     1. Enable the Google Docs API here - https://developers.google.com/docs/api/quickstart/python/
     Then save your 'credentials.json' in working directory 
